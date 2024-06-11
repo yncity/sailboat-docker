@@ -21,7 +21,7 @@ source /opt/ros/jazzy/setup.bash
 
 # At seprate terminals with each joined into two separate containers
 ros2 run demo_nodes_py talker
-ros2 run demo_nodes_cpp listener
+ros2 run demo_nodes_py listener
 
 # Hurray!
 ```

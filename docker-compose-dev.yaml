@@ -1,19 +1,19 @@
 services:
   hardware:
-    # build:
-    #   context: ./ # 도커파일 폴더
-    #   dockerfile: ioes-hardware.dockerfile
-    # image: ioes-hardware:latest
-    image: ioeslab/ioes-hardware:latest
+    build:
+      context: ./ # 도커파일 폴더
+      dockerfile: ioes-hardware.dockerfile
+    image: ioes-hardware:latest
+    # image: ioeslab/ioes-hardware:latest
     command: /bin/bash
     tty: true
 
   simulator:
-    # build:
-    #   context: ./ # 도커파일 폴더
-    #   dockerfile: ioes-simulator.dockerfile
-    # image: ioes-simulator:latest
-    image: ioeslab/ioes-simulator:latest
+    build:
+      context: ./ # 도커파일 폴더
+      dockerfile: ioes-simulator.dockerfile
+    image: ioes-simulator:latest
+    # image: ioeslab/ioes-simulator:latest
     environment:
       - "PYTHONUNBUFFERED=1"
     command: >
