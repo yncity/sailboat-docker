@@ -1,0 +1,30 @@
+services:
+  hardware:
+    build:
+      context: ./ # 도커파일 폴더
+      dockerfile: ioes-hardware.dockerfile
+    image: ioes-hardware:latest
+    # image: ioeslab/ioes-hardware:latest
+    command: /bin/bash
+    tty: true
+
+  simulator:
+    build:
+      context: ./ # 도커파일 폴더
+      dockerfile: ioes-simulator.dockerfile
+    image: ioes-simulator:latest
+    # image: ioeslab/ioes-simulator:latest
+    environment:
+      - "PYTHONUNBUFFERED=1"
+    command: >
+      /bin/bash -c "
+      rm -f /var/run/xrdp/xrdp*.pid >/dev/null 2>&1;
+      service dbus restart >/dev/null 2>&1;
+      /usr/lib/systemd/systemd-logind >/dev/null 2>&1 & 
+      [ -f /usr/sbin/sshd ] && /usr/sbin/sshd;
+      xrdp-sesman --config /etc/xrdp/sesman.ini;
+      xrdp --nodaemon --config /etc/xrdp/xrdp.ini
+      "
+    tty: true
+    ports:
+      - "3389:3389"
