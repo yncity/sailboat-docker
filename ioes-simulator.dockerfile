@@ -141,9 +141,9 @@ ENV LIBGL_ALWAYS_INDIRECT=1
 ENV LANG=en_US.UTF-8
 
 # Set-up ROS Environment as default
-RUN echo "" >> ~/.bashrc && \
-    echo "# Set ROS Environment alive" >> ~/.bashrc && \
-    echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+RUN echo "" >> /home/$USER/.bashrc && \
+    echo "# Set ROS Environment alive" >> /home/$USER/.bashrc && \
+    echo "source /opt/ros/jazzy/setup.bash" >> /home/$USER/.bashrc
 
 # RUN mkdir /home/$USER/.config && \
 #     echo "yes" >> /home/$USER/.config/gnome-initial-setup-done

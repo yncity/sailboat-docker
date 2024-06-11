@@ -36,3 +36,19 @@ CMD ["/bin/bash"]
 
 # # launch ros package
 # CMD ["ros2", "launch", "demo_nodes_cpp", "talker_listener.launch.py"]
+
+# ROS-Ardupilot install
+
+RUN source /opt/ros/humble/setup.bash
+RUN mkdir -p /home/ros2_ws/src
+RUN cd /home/ros2_ws
+RUN vcs import --recursive --input  https://raw.githubusercontent.com/ArduPilot/ardupilot/master/Tools/ros2/ros2.repos src
+RUN apt update
+RUN rosdep update
+RUN rosdep install --from-paths src --ignore-src -y
+RUN apt install default-jre -y
+RUN cd /home/ros2_ws
+RUN git clone --recurse-submodules https://github.com/ardupilot/Micro-XRCE-DDS-Gen.git
+RUN cd Micro-XRCE-DDS-Gen
+RUN ./gradlew assemble
+RUN echo "export PATH=\$PATH:$PWD/scripts" >> ~/.bashrc

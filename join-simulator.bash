@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-IMG="ioes-simulator"
+IMG="ioeslab/ioes-simulator"
 CONTAINER_ID=""
 
 while [[ $# -gt 0 ]]
